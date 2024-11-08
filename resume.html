@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+
+  <title>Nathan Hensby - Resume</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"> 
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    .navbar {
+      background-color: #333 !important;
+    }
+    .navbar-brand, .navbar-nav .nav-link {
+      color: #eee !important;
+    }
+    .card-container {
+      display: grid;
+      gap: 15px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-rows: auto;
+      margin: 0 auto;
+      max-width: 1100px;
+    }
+    .card {
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    .card-body {
+      padding: 15px;
+      text-align: center;
+    }
+    .card-title {
+      font-size: 1.5rem;
+      color: #444;
+      margin-bottom: 0.5rem;
+    }
+    .card-text {
+      color: #666;
+      margin: 0.5rem 0;
+    }
+    .icon-wrapper {
+      font-size: 2.5rem;
+      color: #4a90e2;
+    }
+    .company-logo {
+      max-height: 50px;
+      margin-bottom: 15px;
+    }
+    .education-photo {
+      max-width: 100%;
+      border: 2px solid rgba(85, 85, 85, 0.5);
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      margin-top: 10px;
+      width: 100%;
+    }
+    .list-group-item {
+      background-color: transparent;
+      border: none;
+      padding: 3px 0;
+      color: #444;
+      font-size: 0.9rem;
+    }
+
+    /* Grid Span Customizations */
+    .education-card {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .compact-card {
+      grid-row: span 1;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light"> 
+    <a class="navbar-brand" href="/">Projects</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span> 
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="resume.html">Resume</a>
+        </li>
+        <li class="nav-item">
+                <a class="nav-link" href="about.html">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="mailto:me@nhensby.com">Contact me</a> 
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+    <div class="container mt-5">
+    <h1 class="text-center mb-4">Nathan Hensby - Resume</h1>
+    <div class="card-container">
+
+      <!-- About Me Card -->
+      <div class="card compact-card">
+        <div class="card-body">
+          <div class="icon-wrapper"><i class="bi bi-person-circle"></i></div>
+          <h5 class="card-title">About Me</h5>
+          <p class="card-text">Software engineer in Banking and Financial Services within Macquarie Group. I enjoy creating projects with Go and mentoring eager learners.</p>
+        </div>
+      </div>
+
+      <!-- Work Experience Card (Macquarie) -->
+      <div class="card compact-card">
+        <div class="card-body">
+          <img src="/images/mac-bank.png" alt="Macquarie Bank" class="company-logo">
+          <h5 class="card-title">Software Engineer - Senior Associate</h5>
+          <p class="card-text"><strong>Macquarie Group</strong><br>Nov 2023 - Present</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Core Go developer for synthetic monitoring application.</li>
+            <li class="list-group-item">Mentoring and upskilling other engineers in Go.</li>
+            <li class="list-group-item">Using Ent & GraphQL for configuration storage.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Work Experience Card (Commonwealth Bank) -->
+      <div class="card compact-card">
+        <div class="card-body">
+          <img src="/images/cba.png" alt="Commonwealth Bank of Australia" class="company-logo">
+          <h5 class="card-title">Technology Associate</h5>
+          <p class="card-text"><strong>Commonwealth Bank</strong><br>Dec 2021 - Nov 2023</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Developed microservices in Go.</li>
+            <li class="list-group-item">Worked with AWS, GCP, Docker, and K3S.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Education Card (spans multiple rows and columns) -->
+      <div class="card education-card">
+        <div class="card-body">
+          <img src="/images/mac-uni.png" alt="Macquarie University" class="company-logo">
+          <h5 class="card-title">Bachelor of Information Technology</h5>
+          <p class="card-text"><strong>Macquarie University</strong><br>2020 - 2024</p>
+          <p class="card-text">Major: Software Technology</p>
+          <img src="/images/graduation-photo.jpg" alt="Graduation Photo" class="education-photo">
+        </div>
+      </div>
+
+      <!-- Core Skills Card -->
+      <div class="card compact-card">
+        <div class="card-body">
+          <div class="icon-wrapper"><i class="bi bi-gear-fill"></i></div>
+          <h5 class="card-title">Core Skills</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><i class="bi bi-people-fill"></i> Excellent interpersonal skills</li>
+            <li class="list-group-item"><i class="bi bi-code-slash"></i> Object-Oriented Programming (OOP)</li>
+            <li class="list-group-item"><i class="bi bi-lightbulb-fill"></i> Problem-solving / Critical Thinking</li>
+            <li class="list-group-item"><i class="bi bi-diagram-3-fill"></i> System Design</li>
+            <li class="list-group-item"><i class="bi bi-stack"></i> Data Structures and Algorithms (DSA)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Links Card -->
+      <div class="card compact-card">
+        <div class="card-body">
+          <div class="icon-wrapper"><i class="bi bi-link-45deg"></i></div>
+          <h5 class="card-title">Links</h5>
+          <p class="card-text"><a href="https://au.linkedin.com/in/nathan-hensby-5a2922258" target="_blank">LinkedIn</a></p>
+          <p class="card-text"><a href="https://github.com/Nathene" target="_blank">GitHub</a></p>
+          <p class="card-text"><a href="https://leetcode.com/u/Thene/" target="_blank">LeetCode</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
