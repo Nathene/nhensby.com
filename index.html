@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="images/favicon.ico">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nathan Hensby</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+
+  <title>Nathan Hensby - Projects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <style>
     body {
       font-family: 'Roboto', sans-serif;
-      background-color: #222;
-      color: #eee;
+      background-color: #ebebeb;
+      color: #333;
     }
     .navbar {
       background-color: #333 !important;
@@ -18,62 +21,83 @@
     .navbar-brand, .navbar-nav .nav-link {
       color: #eee !important;
     }
+    .navbar-brand:hover, .navbar-nav .nav-link:hover {
+      color: #007bff !important;
+    }
     .container {
-      max-width: 1100px;
+      max-width: 1000px;
       padding: 20px;
     }
     .section-title {
       text-align: center;
-      font-size: 2rem;
-      color: #eee;
-      margin: 20px 0 40px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #444;
+      margin: 30px 0;
     }
-.card-container {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-auto-rows: 200px;
-  justify-content: center;
-}
-
-.card {
-  background-color: #333;
-  color: #eee;
-  border: 1px solid #555;
-  border-radius: 8px;
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  overflow: hidden; 
-}
-
-.card-title {
-  font-size: 1.25rem;
-  margin-bottom: 10px;
-  color: #4a90e2;
-  white-space: nowrap; 
-  overflow: hidden;
-  text-overflow: ellipsis; 
-}
-
+    .category-title {
+      font-size: 1.8rem;
+      color: #007bff;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 8px;
+    }
+    .card-container {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      justify-content: space-around;
+    }
+    .card {
+      background-color: #f8f8f8;
+      color: #333;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
     .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      transform: translateY(-8px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      background-color: #e5e5e5;
+    }
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+    .card p {
+      color: #666;
     }
     .card-link {
       text-decoration: none;
       color: inherit;
     }
+    .footer {
+      text-align: center;
+      padding: 20px 0;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    .footer a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="#">Projects</a>
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/">Projects</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -92,10 +116,13 @@
     </div>
   </nav>
 
-  <div class="container">
-    <h1 class="section-title">Projects</h1>
+  <div class="container mt-4">
+    <!--<h1 class="section-title">Projects</h1>-->
+
+    <!-- Online Projects Section -->
+    <h2 class="category-title">Web Projects</h2>
     <div class="card-container">
-      <a href="https://github.com/Nathene/natheneflix" target="_blank" class="card-link">
+      <a href="https://natheneflix.com" target="_blank" class="card-link">
         <div class="card">
           <h2 class="card-title">Natheneflix</h2>
           <p>Personal streaming service project.</p>
@@ -113,6 +140,11 @@
           <p>Custom URL shortening service.</p>
         </div>
       </a>
+    </div>
+
+    <!-- GitHub Projects Section -->
+    <h2 class="category-title">GitHub Projects</h2>
+    <div class="card-container">
       <a href="https://github.com/Nathene/load_balancer" target="_blank" class="card-link">
         <div class="card">
           <h2 class="card-title">Load Balancer</h2>
@@ -134,9 +166,12 @@
     </div>
   </div>
 
+  <div class="footer">
+    &copy; <script>document.write(new Date().getFullYear())</script> Nathan Hensby. 
+  </div>
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
