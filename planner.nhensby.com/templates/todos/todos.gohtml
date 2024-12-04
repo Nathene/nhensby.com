@@ -1,0 +1,174 @@
+{{ define "content" }}
+<div class="container mt-5">
+    <h2 class="mb-4 {{ if .darkMode }}text-white{{ else }}text-dark{{ end }}">Group: {{ .GroupName }}</h2>
+
+    <!-- Add New Todo Button -->
+    <div class="text-end mb-4">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTodoModal">
+            Add New Todo
+        </button>
+    </div>
+
+    <!-- Add New Todo Modal -->
+    <div class="modal fade" id="addTodoModal" tabindex="-1" aria-labelledby="addTodoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content {{ if .darkMode }}bg-dark text-white{{ else }}bg-light text-dark{{ end }}">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTodoModalLabel">Add New Todo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="/groups/{{ .GroupID }}">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="todoName" class="form-label">Todo Name</label>
+                            <input type="text" class="form-control" id="todoName" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="todoDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="todoDescription" name="description" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="urgent" name="urgent">
+                            <label class="form-check-label" for="urgent">Mark as urgent</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Todo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Urgent Todo Lists -->
+    <h3 class="mt-4 {{ if .darkMode }}text-danger{{ else }}text-dark{{ end }}">Urgent Tickets</h3>
+    <div class="row">
+        {{ range .TodoLists }}
+        {{ if and .Urgent (not .Done) }}
+        <div class="col-md-6 mb-4">
+            <a href="/todos/{{ .ID }}/edit" class="text-decoration-none">
+                <div class="card h-100 shadow-sm {{ if $.darkMode }}bg-dark text-white border-secondary{{ else }}bg-light text-dark border-muted{{ end }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ .Name }}</h5>
+                        <p class="card-text">
+                            {{ if .Description }}
+                            <small>{{ .Description }}</small>
+                            {{ else }}
+                            <em>No description provided</em>
+                            {{ end }}
+                        </p>
+                        <p class="mb-2">
+                            Priority: <strong>{{ .Priority }}</strong>
+                        </p>
+                        <p class="mb-2">
+                            Status: <span class="badge {{ statusColor .Status }}">{{ .Status }}</span>
+                        </p>
+                        <h6 class="mt-3">Subtasks:</h6>
+                        <ul class="list-group list-group-flush">
+                            {{ range .Subtasks }}
+                            <li class="list-group-item p-2 {{ if .Done }}text-decoration-line-through text-muted{{ end }}">
+                                <small>{{ .Name }}</small>
+                            </li>
+                            {{ else }}
+                            <li class="list-group-item p-2">
+                                <small><em>No subtasks added yet</em></small>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {{ end }}
+        {{ end }}
+    </div>
+
+    <!-- Non-Urgent Todo Lists -->
+    <h3 class="mt-4 {{ if .darkMode }}text-white{{ else }}text-dark{{ end }}">Other Tickets</h3>
+    <div class="row">
+        {{ range .TodoLists }}
+        {{ if and (not .Urgent) (not .Done) }}
+        <div class="col-md-6 mb-4">
+            <a href="/todos/{{ .ID }}/edit" class="text-decoration-none">
+                <div class="card h-100 shadow-sm {{ if $.darkMode }}bg-dark text-white border-secondary{{ else }}bg-light text-dark border-muted{{ end }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ .Name }}</h5>
+                        <p class="card-text">
+                            {{ if .Description }}
+                            <small>{{ .Description }}</small>
+                            {{ else }}
+                            <em>No description provided</em>
+                            {{ end }}
+                        </p>
+                        <p class="mb-2">
+                            Priority: <strong>{{ .Priority }}</strong>
+                        </p>
+                        <p class="mb-2">
+                            Status: <span class="badge {{ statusColor .Status }}">{{ .Status }}</span>
+                        </p>
+                        <h6 class="mt-3">Subtasks:</h6>
+                        <ul class="list-group list-group-flush">
+                            {{ range .Subtasks }}
+                            <li class="list-group-item p-2 {{ if .Done }}text-decoration-line-through text-muted{{ end }}">
+                                <small>{{ .Name }}</small>
+                            </li>
+                            {{ else }}
+                            <li class="list-group-item p-2">
+                                <small><em>No subtasks added yet</em></small>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {{ end }}
+        {{ end }}
+    </div>
+
+<!-- Done Tickets Section -->
+<h3 class="mt-4 {{ if .darkMode }}text-success{{ else }}text-dark{{ end }}">Done Tickets</h3>
+<div class="row">
+    {{ range .TodoLists }}
+    {{ if .Done }}
+    <div class="col-md-6 mb-4">
+        <a href="/todos/{{ .ID }}/edit" class="text-decoration-none">
+            <div class="card h-100 shadow-sm {{ if $.darkMode }}bg-dark text-white border-secondary{{ else }}bg-light text-dark border-muted{{ end }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ .Name }}</h5>
+                    <p class="card-text">
+                        {{ if .Description }}
+                        <small>{{ .Description }}</small>
+                        {{ else }}
+                        <em>No description provided</em>
+                        {{ end }}
+                    </p>
+                    <p class="mb-2">
+                        Priority: <strong>{{ .Priority }}</strong>
+                    </p>
+                    <p class="mb-2">
+                        Status: <span class="badge {{ statusColor .Status }}">{{ .Status }}</span>
+                    </p>
+                    <h6 class="mt-3">Subtasks:</h6>
+                    <ul class="list-group list-group-flush">
+                        {{ range .Subtasks }}
+                        <li class="list-group-item p-2 {{ if .Done }}text-decoration-line-through text-muted{{ end }}">
+                            <small>{{ .Name }}</small>
+                        </li>
+                        {{ else }}
+                        <li class="list-group-item p-2">
+                            <small><em>No subtasks added yet</em></small>
+                        </li>
+                        {{ end }}
+                    </ul>
+                </div>
+            </div>
+        </a>
+    </div>
+    {{ end }}
+    {{ end }}
+</div>
+
+</div>
+{{ end }}
