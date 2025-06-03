@@ -12,7 +12,7 @@ import Config
 # If you use `mix release`, you need to explicitly enable the server
 # by passing the PHX_SERVER=true when you start it:
 #
-#     PHX_SERVER=true bin/nhensby start
+#    PHX_SERVER=true bin/nhensby start
 #
 # Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
 # script that automatically sets the env var above.
@@ -50,41 +50,25 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
-  repo_config = Application.get_env(:nhensby, Nhensby.Repo)
-
-  database_url =
-    case Keyword.get(repo_config, :adapter) do
-      Ecto.Adapters.SQLite3 ->
-        Keyword.get(repo_config, :database)
-
-      _ ->
-        System.get_env("DATABASE_URL") ||
-          raise """
-          environment variable DATABASE_URL is missing.
-          For example: ecto://USER:PASS@HOST/DATABASE
-          """
-    end
-
-  maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
-
   config :nhensby, Nhensby.Repo,
-    url: database_url,
+    adapter: Ecto.Adapters.SQLite3,
+    database: "/home/ec2-user/nhensby.com/nhensby.com/data/production.db",
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-    socket_options: maybe_ipv6
+    timeout: 5000
 
   # ## SSL Support
   #
   # To get SSL working, you will need to add the `https` key
   # to your endpoint configuration:
   #
-  #     config :nhensby, NhensbyWeb.Endpoint,
-  #       https: [
-  #         ...,
-  #         port: 443,
-  #         cipher_suite: :strong,
-  #         keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
-  #         certfile: System.get_env("SOME_APP_SSL_CERT_PATH")
-  #       ]
+  #    config :nhensby, NhensbyWeb.Endpoint,
+  #      https: [
+  #        ...,
+  #        port: 443,
+  #        cipher_suite: :strong,
+  #        keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
+  #        certfile: System.get_env("SOME_APP_SSL_CERT_PATH")
+  #      ]
   #
   # The `cipher_suite` is set to `:strong` to support only the
   # latest and more secure SSL ciphers. This means old browsers
@@ -99,8 +83,8 @@ if config_env() == :prod do
   # We also recommend setting `force_ssl` in your config/prod.exs,
   # ensuring no data is ever sent via http, always redirecting to https:
   #
-  #     config :nhensby, NhensbyWeb.Endpoint,
-  #       force_ssl: [hsts: true]
+  #    config :nhensby, NhensbyWeb.Endpoint,
+  #      force_ssl: [hsts: true]
   #
   # Check `Plug.SSL` for all available options in `force_ssl`.
 
@@ -110,15 +94,15 @@ if config_env() == :prod do
   # Also, you may need to configure the Swoosh API client of your choice if you
   # are not using SMTP. Here is an example of the configuration:
   #
-  #     config :nhensby, Nhensby.Mailer,
-  #       adapter: Swoosh.Adapters.Mailgun,
-  #       api_key: System.get_env("MAILGUN_API_KEY"),
-  #       domain: System.get_env("MAILGUN_DOMAIN")
+  #    config :nhensby, Nhensby.Mailer,
+  #      adapter: Swoosh.Adapters.Mailgun,
+  #      api_key: System.get_env("MAILGUN_API_KEY"),
+  #      domain: System.get_env("MAILGUN_DOMAIN")
   #
   # For this example you need include a HTTP client required by Swoosh API client.
   # Swoosh supports Hackney and Finch out of the box:
   #
-  #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
+  #    config :swoosh, :api_client, Swoosh.ApiClient.Hackney
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
 end
