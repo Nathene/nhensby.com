@@ -65,6 +65,28 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+  repo_config = Application.get_env(:nhensby, Nhensby.Repo)
+
+  database_url =
+    case Keyword.get(repo_config, :adapter) do
+      Ecto.Adapters.SQLite3 ->
+        Keyword.get(repo_config, :database)
+
+      _ ->
+        System.get_env("DATABASE_URL") ||
+          raise """
+          environment variable DATABASE_URL is missing.
+          For example: ecto://USER:PASS@HOST/DATABASE
+          """
+    end
+
+  maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
+
+  config :nhensby, Nhensby.Repo,
+    url: database_url,
+    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+    socket_options: maybe_ipv6
+
   # ## SSL Support
   #
   # To get SSL working, you will need to add the `https` key

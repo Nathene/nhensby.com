@@ -16,5 +16,11 @@ config :swoosh, local: false
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :nhensby, Nhensby.Repo,
+  adapter: Ecto.Adapters.SQLite3,
+  database: "/path/to/your/production.db",
+  pool_size: 10,
+  timeout: 5000
+
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.
