@@ -18,7 +18,7 @@ config :logger, level: :info
 
 config :nhensby, Nhensby.Repo,
   adapter: Ecto.Adapters.SQLite3,
-  database: "db.db",
+  database: "ecto_sqlite3:///db.db",
   pool_size: 10,
   timeout: 5000
 
