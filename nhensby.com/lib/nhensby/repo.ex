@@ -1,5 +1,4 @@
 defmodule Nhensby.Repo do
   use Ecto.Repo,
-    otp_app: :nhensby,
-    adapter: Ecto.Adapters.Postgres
+    otp_app: :nhensby
 end
