@@ -36,7 +36,11 @@ defmodule Nhensby.MixProject do
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.10"},
       {:ecto_sqlite3, "~> 0.11"},
-      {:postgrex, ">= 0.0.0"},
+      if Mix.env() in [:dev, :test] do
+        {:postgrex, ">= 0.0.0"}
+      else
+        nil
+      end,
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 1.0"},
@@ -60,6 +64,7 @@ defmodule Nhensby.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"}
     ]
+    |> Enum.reject(&is_nil/1)
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
